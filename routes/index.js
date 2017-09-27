@@ -14,19 +14,12 @@ router.get('/profiles/:id', (req, res) => {
 })
 
 router.get('/form', (req, res) => {
-  const viewData = {}
-  db.makeUser(req.app.get('connection'))
-    .then(result => {
-      viewData.users = result[0]
-      viewData.profiles = result[1]
-      res.render('form', viewData)
-    })
-    .catch(function (err) {
-      res.status(500).send('DATABASE ERROR: ' + err.message)
-    })
+  res.render('form')
 })
 
 router.post('/form', (req, res) => {
+  db.makeUser(req.body, req.app.get('connection'))
+  .then()
   res.redirect('/')
 })
 

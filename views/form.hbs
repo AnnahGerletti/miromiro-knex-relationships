@@ -1,20 +1,23 @@
 <form class="form" action="/form" method="post">
   <label for="name" class="form-item">
     Name:
-    <input type="text" name="name" value="{{name}}">
+    <input type="text" name="name">
   </label>
 
   <label for="email" class="form-item">
     Email:
-    <input type="text" name="email" value="{{email}}">
+    <input type="text" name="email">
   </label>
 
   <label for="username" class="form-item">
-    Username:
-    <input type="text" name="username" value="{{username}}">
+    Url:
+    <input type="text" name="url">
   </label>
 
-  <input type="hidden" name="image" value="{{image}}">
+<label for="image" class="form-item">
+  Profile Picture:
+  <input type="text" name="profilePicture">
+</label>
 
   <input type="submit" name="" value="Submit">
 </form>

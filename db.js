@@ -17,13 +17,23 @@ function getUser (id, connection) {
     .first()
 }
 
-function makeUser (connection) {
-  return Promise.all([
-    connection('users')
-      .select(),
+function makeUser (data, connection) {
+  return connection('users')
+    .insert({
+      name: data.name,
+      email: data.email
+    }, 'id')
+    .then(userId => {
+      console.log(userId)
+      return makeProfile(userId[0], data, connection)
+    })
+}
 
-    connection('profiles')
-      .select()
-
-  ])
+function makeProfile (id, data, connection) {
+  return connection('profiles')
+    .insert({
+      url: data.url,
+      profilePicture: data.profilePicture,
+      user_id: id
+    })
 }
