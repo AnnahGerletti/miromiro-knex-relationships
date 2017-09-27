@@ -1,7 +1,8 @@
 
 module.exports = {
   getUser: getUser,
-  getUsers: getUsers
+  getUsers: getUsers,
+  makeUser: makeUser
 }
 
 function getUsers (connection) {
@@ -14,4 +15,19 @@ function getUser (id, connection) {
     .join('profiles', 'users.id', '=', 'profiles.user_id')
     .select()
     .first()
+}
+
+function makeUser (connection) {
+  const viewData = {}
+  return connection('users')
+    .select()
+    .then(users => {
+      viewData.users = users
+      return connection('profiles')
+        .select()
+        .then(profiles => {
+          viewData.profiles = profiles
+          return viewData
+        })
+    })
 }
