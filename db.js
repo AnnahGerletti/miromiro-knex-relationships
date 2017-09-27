@@ -18,16 +18,12 @@ function getUser (id, connection) {
 }
 
 function makeUser (connection) {
-  const viewData = {}
-  return connection('users')
-    .select()
-    .then(users => {
-      viewData.users = users
-      return connection('profiles')
-        .select()
-        .then(profiles => {
-          viewData.profiles = profiles
-          return viewData
-        })
-    })
+  return Promise.all([
+    connection('users')
+      .select(),
+
+    connection('profiles')
+      .select()
+
+  ])
 }

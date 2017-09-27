@@ -14,8 +14,11 @@ router.get('/profiles/:id', (req, res) => {
 })
 
 router.get('/form', (req, res) => {
+  const viewData = {}
   db.makeUser(req.app.get('connection'))
-    .then(viewData => {
+    .then(result => {
+      viewData.users = result[0]
+      viewData.profiles = result[1]
       res.render('form', viewData)
     })
     .catch(function (err) {
